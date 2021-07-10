@@ -28,6 +28,7 @@ const findUsers = () => {
     }
 }
 
+//Función que hace el segundo nivel del catch
 const failureFunction = () => {
     try {
       errorFunction();

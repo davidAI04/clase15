@@ -4,7 +4,7 @@ const app = express();
 require('dotenv').config();
 const cors = require('cors');
 //Services
-const { createUser } = require('./services/contact.service');
+const { createUser, findUsers } = require('./services/contact.service');
 //Middlewares
 const { corsOption, limiter, controlApiKey } = require('./middlewares/index');
 
@@ -29,7 +29,14 @@ app.listen(process.env.PORT, ()=> {
     console.log(`Servidor iniciado en http://${process.env.HOST}:${process.env.PORT}`);
 })
 
-
+app.get('/users', cors(corsOption), controlApiKey, (req, res) => {
+  try {
+    const users = findUsers();
+    res.status(200).json(users)
+  } catch (error) {
+    return res.status(400).json(error.message)
+  }
+})
 app.post('/users', cors(corsOption), controlApiKey, (req, res) => {
   try {
     const users = createUser (res.body);
