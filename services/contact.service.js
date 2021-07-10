@@ -16,7 +16,7 @@ const createUser = (data) => {
     return UsersDB;
   } catch (error) {
     console.log('entre al primer catch');
-    throw new Error("error en create user");
+    throw new Error(error);
   }
 }
 

@@ -39,7 +39,7 @@ app.get('/users', cors(corsOption), controlApiKey, (req, res) => {
 })
 app.post('/users', cors(corsOption), controlApiKey, (req, res) => {
   try {
-    const users = createUser (res.body);
+    const users = createUser (req.body);
     return res.status(200).json(users);
   } catch (error) {
     console.log('entre al 2do  catch');

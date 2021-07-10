@@ -1,3 +1,4 @@
+require('dotenv').config();
 const rateLimit = require('express-rate-limit');
 
 const corsOption = {
@@ -28,7 +29,7 @@ const chkDatosValidos = function (req, res, next) {
 }
 
 const controlApiKey = function (err, req, res, next) {
-    if (process.env.APIKEY ===  req.body.apikey){
+  if (process.env.APIKEY === req.body.apikey) {
       return next();
     } else {
       let error = {
