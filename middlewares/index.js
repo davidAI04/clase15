@@ -1,3 +1,5 @@
+const rateLimit = require('express-rate-limit');
+
 const corsOption = {
   origin: function (origin, callback) {
     if (process.env.LISTA_BLANCA.indexOf(origin) !== -1) {
