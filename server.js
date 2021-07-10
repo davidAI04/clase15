@@ -6,7 +6,7 @@ const cors = require('cors');
 //Services
 const { createUser, findUsers } = require('./services/contact.service');
 //Middlewares
-const { corsOption, limiter, controlApiKey } = require('./middlewares/index');
+const { corsOption, limiter, controlApiKey, chkDatosValidos } = require('./middlewares/index');
 
 //configuración de middlewares globales
 app.use(express.json());
@@ -37,7 +37,7 @@ app.get('/users', cors(corsOption), controlApiKey, (req, res) => {
     return res.status(400).json(error.message)
   }
 })
-app.post('/users', cors(corsOption), controlApiKey, (req, res) => {
+app.post('/users', cors(corsOption), controlApiKey, chkDatosValidos, (req, res) => {
   try {
     const users = createUser (req.body);
     return res.status(200).json(users);
