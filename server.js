@@ -30,7 +30,7 @@ app.listen(process.env.PORT, ()=> {
 })
 
 
-app.post('/', cors(corsOption), controlApiKey, (req, res) => {
+app.post('/users', cors(corsOption), controlApiKey, (req, res) => {
   try {
     const users = createUser (res.body);
     return res.status(200).json(users);

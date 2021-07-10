@@ -3,9 +3,9 @@ const rateLimit = require('express-rate-limit');
 const corsOption = {
   origin: function (origin, callback) {
     if (process.env.LISTA_BLANCA.indexOf(origin) !== -1) {
-      callback(null, true)
+      callback(null, true);
     } else {
-      callback(new Error('No autorizado por CORS'))
+      callback(new Error('No autorizado por CORS'));
     }
   }
 }
@@ -29,12 +29,12 @@ const chkDatosValidos = function (req, res, next) {
 
 const controlApiKey = function (err, req, res, next) {
     if (process.env.APIKEY ===  req.body.apikey){
-        return next()
-    }else {
-        let error = {
-          "error": "Debe enviar una Api-Key"  
-        }
-        return res.status(400).json(error)
+      return next();
+    } else {
+      let error = {
+        "error": "Debe enviar una Api-Key"
+      };
+      return res.status(400).json(error);
     }
 }
 

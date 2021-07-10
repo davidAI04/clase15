@@ -9,4 +9,9 @@ class User {
   }
 }
 
-module.exports = { UsersDB, User }
+//Funcion para simular un error de 3 niveles *esta función se vuelve a consumir en los service
+const errorFunction = () => {
+  throw new Error ("(Matrix) Morfeo, debiste tomar la pastilla AZUL! JAJAJAJAJAJA ")
+}
+
+module.exports = { UsersDB, User, errorFunction }

@@ -1,4 +1,4 @@
-const { UsersDB, User } = require('../db/index');
+const { UsersDB, User, errorFunction } = require('../db/index');
 
 
 const intermedio = () => {
@@ -20,4 +20,21 @@ const createUser = (data) => {
   }
 }
 
-module.exports = { createUser };
+const findUsers = () => {
+    try {
+      return UsersDB;
+    }catch (error) {
+      throw new Error(error);
+    }
+}
+
+const failureFunction = () => {
+    try {
+      errorFunction();
+    } catch (error) {
+      console.log('falla desde el services.usuarios'); 
+      throw new Error(error.message); 
+    }
+}
+
+module.exports = { createUser, findUsers, failureFunction };
