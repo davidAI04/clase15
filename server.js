@@ -2,13 +2,18 @@
 const express = require('express');
 const app = express();
 require('dotenv').config();
-
 const cors = require('cors');
+//Services
+const { createUser } = require('./services/contact.service');
+//Middlewares
+const { corsOption, limiter, controlApiKey } = require('./middlewares/index');
 
-//middlewares globales
+//configuración de middlewares globales
 app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
+app.use(limiter)
+
 app.use((err, req, res, next) => {
   if (err) {
     if (!res.headersSent) {
@@ -19,16 +24,13 @@ app.use((err, req, res, next) => {
 })
 
 
-const { corsOption } = require('./middlewares/index');
-const { createUser } = require('./services/contact.service');
-
 //levantamos nuestro servidor
 app.listen(process.env.PORT, ()=> {
     console.log(`Servidor iniciado en http://${process.env.HOST}:${process.env.PORT}`);
 })
 
 
-app.post('/', cors(corsOption), (req, res) => {
+app.post('/', cors(corsOption), controlApiKey, (req, res) => {
   try {
     const users = createUser (res.body);
     return res.status(200).json(users);

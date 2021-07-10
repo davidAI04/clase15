@@ -1,5 +1,13 @@
 const { UsersDB, User } = require('../db/index');
 
+
+const intermedio = () => {
+  try {
+    const llamado = createUser()
+  } catch (error) {
+    return error
+  }
+}
 const createUser = (data) => {
   try {
     const { nombre, apellido, email } = data;
